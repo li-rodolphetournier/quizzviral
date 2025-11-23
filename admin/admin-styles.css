@@ -1,0 +1,70 @@
+/**
+ * Styles admin pour ViralQuiz
+ */
+
+#vq-questions-container {
+	margin: 20px 0;
+}
+
+.vq-question-item {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	background: #fff;
+	padding: 15px;
+}
+
+.vq-question-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.vq-question-header h3 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.vq-question-content {
+	padding: 10px 0;
+}
+
+.vq-question-content .vq-question-text {
+	margin-bottom: 15px;
+}
+
+.vq-answers {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 15px;
+	margin-top: 15px;
+}
+
+.vq-answer-item {
+	border: 1px solid #e0e0e0;
+	padding: 10px;
+	border-radius: 3px;
+	background: #f9f9f9;
+}
+
+.vq-answer-item label {
+	display: block;
+	margin-bottom: 8px;
+}
+
+.vq-answer-item input[type="text"] {
+	width: 100%;
+	margin-top: 5px;
+}
+
+.vq-answer-item input[type="number"] {
+	width: 80px;
+}
+
+#vq-add-question {
+	margin-top: 20px;
+}
+
