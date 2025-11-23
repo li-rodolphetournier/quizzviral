@@ -245,6 +245,9 @@ class ViralQuiz {
 			VQ_VERSION
 		);
 		
+		// Enqueue WordPress media uploader
+		wp_enqueue_media();
+		
 		wp_enqueue_script(
 			'vq-admin-js',
 			VQ_PLUGIN_URL . 'admin/admin-scripts.js',

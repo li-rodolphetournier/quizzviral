@@ -73,6 +73,18 @@
 							<input type="text" class="vq-answer-text widefat" placeholder="Entrez la réponse..." />
 						</label>
 					</p>
+					<p>
+						<label>
+							<strong>Image de la réponse (optionnel) :</strong>
+						</label>
+						<div class="vq-answer-image-container">
+							<input type="hidden" class="vq-answer-image-id" value="0" />
+							<input type="hidden" class="vq-answer-image-url" value="" />
+							<div class="vq-image-preview">
+								<button type="button" class="vq-upload-image button">Choisir une image</button>
+							</div>
+						</div>
+					</p>
 					${quizType === 'trivia' 
 						? `<p>
 							<label>
@@ -106,6 +118,18 @@
 							<input type="text" class="vq-question-text widefat" placeholder="Entrez votre question..." />
 						</label>
 					</p>
+					<p>
+						<label>
+							<strong>Image de la question (optionnel) :</strong>
+						</label>
+						<div class="vq-question-image-container">
+							<input type="hidden" class="vq-question-image-id" value="0" />
+							<input type="hidden" class="vq-question-image-url" value="" />
+							<div class="vq-image-preview">
+								<button type="button" class="vq-upload-image button">Choisir une image</button>
+							</div>
+						</div>
+					</p>
 					<div class="vq-answers">
 						${answersHTML}
 					</div>
@@ -134,16 +158,22 @@
 		
 		$('#vq-questions-list .vq-question-item').each(function() {
 			const questionText = $(this).find('.vq-question-text').val();
+			const questionImageId = $(this).find('.vq-question-image-id').val() || 0;
+			const questionImageUrl = $(this).find('.vq-question-image-url').val() || '';
 			const answers = [];
 			
 			$(this).find('.vq-answer-item').each(function(answerIndex) {
 				const answerText = $(this).find('.vq-answer-text').val();
+				const answerImageId = $(this).find('.vq-answer-image-id').val() || 0;
+				const answerImageUrl = $(this).find('.vq-answer-image-url').val() || '';
 				const quizType = getQuizType();
 				
 				const answer = {
 					text: answerText,
 					score: 0,
-					is_correct: '0'
+					is_correct: '0',
+					image: answerImageUrl,
+					image_id: answerImageId
 				};
 				
 				if (quizType === 'trivia') {
@@ -159,6 +189,8 @@
 			if (questionText) {
 				questions.push({
 					question_text: questionText,
+					image: questionImageUrl,
+					image_id: questionImageId,
 					answers: answers
 				});
 			}
@@ -166,6 +198,74 @@
 		
 		$('#vq-questions-data').val(JSON.stringify(questions));
 	}
+	
+	// Gérer l'upload d'images
+	let mediaUploader;
+	
+	$(document).on('click', '.vq-upload-image', function(e) {
+		e.preventDefault();
+		
+		const $button = $(this);
+		const $container = $button.closest('.vq-image-preview');
+		const $imageIdInput = $container.siblings('.vq-question-image-id, .vq-answer-image-id');
+		const $imageUrlInput = $container.siblings('.vq-question-image-url, .vq-answer-image-url');
+		
+		// Si le media uploader existe déjà, le réinitialiser
+		if (mediaUploader) {
+			mediaUploader.open();
+			return;
+		}
+		
+		// Créer le media uploader
+		mediaUploader = wp.media({
+			title: 'Choisir une image',
+			button: {
+				text: 'Utiliser cette image'
+			},
+			multiple: false
+		});
+		
+		// Quand une image est sélectionnée
+		mediaUploader.on('select', function() {
+			const attachment = mediaUploader.state().get('selection').first().toJSON();
+			const imageUrl = attachment.url;
+			const imageId = attachment.id;
+			
+			// Mettre à jour les champs hidden
+			$imageIdInput.val(imageId);
+			$imageUrlInput.val(imageUrl);
+			
+			// Afficher l'image
+			$container.html(`
+				<img src="${imageUrl}" alt="" style="max-width: 200px; height: auto; display: block; margin: 10px 0;" />
+				<button type="button" class="vq-remove-image button">Supprimer</button>
+			`);
+			
+			updateQuestionsData();
+		});
+		
+		// Ouvrir le media uploader
+		mediaUploader.open();
+	});
+	
+	// Supprimer une image
+	$(document).on('click', '.vq-remove-image', function(e) {
+		e.preventDefault();
+		
+		const $button = $(this);
+		const $container = $button.closest('.vq-image-preview');
+		const $imageIdInput = $container.siblings('.vq-question-image-id, .vq-answer-image-id');
+		const $imageUrlInput = $container.siblings('.vq-question-image-url, .vq-answer-image-url');
+		
+		// Réinitialiser les champs
+		$imageIdInput.val(0);
+		$imageUrlInput.val('');
+		
+		// Réafficher le bouton
+		$container.html('<button type="button" class="vq-upload-image button">Choisir une image</button>');
+		
+		updateQuestionsData();
+	});
 	
 	// Écouter les changements dans les champs
 	$(document).on('input change', '.vq-question-text, .vq-answer-text, .vq-answer-score, .vq-is-correct', function() {

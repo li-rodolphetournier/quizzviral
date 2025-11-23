@@ -64,6 +64,12 @@ class VQ_Frontend_Render {
 				<?php foreach ( $questions as $index => $question ) : ?>
 					<div class="vq-question-wrapper <?php echo 0 === $index ? 'vq-active' : ''; ?>" data-question-index="<?php echo esc_attr( $index ); ?>">
 						<div class="vq-question">
+							<?php if ( ! empty( $question['image'] ) ) : ?>
+								<div class="vq-question-image">
+									<img src="<?php echo esc_url( $question['image'] ); ?>" alt="<?php echo esc_attr( $question['question_text'] ?? '' ); ?>" />
+								</div>
+							<?php endif; ?>
+							
 							<h3 class="vq-question-title">
 								<?php echo esc_html( $question['question_text'] ?? '' ); ?>
 							</h3>
@@ -77,6 +83,11 @@ class VQ_Frontend_Render {
 													name="vq_answer_<?php echo esc_attr( $index ); ?>" 
 													value="<?php echo esc_attr( $answer_index ); ?>" 
 													class="vq-answer-input" />
+												<?php if ( ! empty( $answer['image'] ) ) : ?>
+													<div class="vq-answer-image">
+														<img src="<?php echo esc_url( $answer['image'] ); ?>" alt="<?php echo esc_attr( $answer['text'] ); ?>" />
+													</div>
+												<?php endif; ?>
 												<span class="vq-answer-text"><?php echo esc_html( $answer['text'] ); ?></span>
 											</label>
 										<?php endif; ?>

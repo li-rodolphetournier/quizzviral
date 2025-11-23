@@ -134,6 +134,8 @@ class VQ_Admin_Metabox {
 				'text'       => '',
 				'score'      => 0,
 				'is_correct' => '0',
+				'image'      => '',
+				'image_id'   => 0,
 			);
 		}
 		
@@ -156,6 +158,28 @@ class VQ_Admin_Metabox {
 					</label>
 				</p>
 				
+				<p>
+					<label>
+						<strong><?php esc_html_e( 'Image de la question (optionnel) :', 'viral-quiz' ); ?></strong>
+					</label>
+					<div class="vq-question-image-container">
+						<?php
+						$question_image = isset( $question['image'] ) ? esc_url( $question['image'] ) : '';
+						$question_image_id = isset( $question['image_id'] ) ? absint( $question['image_id'] ) : 0;
+						?>
+						<input type="hidden" class="vq-question-image-id" value="<?php echo esc_attr( $question_image_id ); ?>" />
+						<input type="hidden" class="vq-question-image-url" value="<?php echo esc_url( $question_image ); ?>" />
+						<div class="vq-image-preview">
+							<?php if ( $question_image ) : ?>
+								<img src="<?php echo esc_url( $question_image ); ?>" alt="" style="max-width: 200px; height: auto; display: block; margin: 10px 0;" />
+								<button type="button" class="vq-remove-image button"><?php esc_html_e( 'Supprimer l\'image', 'viral-quiz' ); ?></button>
+							<?php else : ?>
+								<button type="button" class="vq-upload-image button"><?php esc_html_e( 'Choisir une image', 'viral-quiz' ); ?></button>
+							<?php endif; ?>
+						</div>
+					</div>
+				</p>
+				
 				<div class="vq-answers">
 					<?php foreach ( $answers as $answer_index => $answer ) : ?>
 						<div class="vq-answer-item">
@@ -166,6 +190,28 @@ class VQ_Admin_Metabox {
 										value="<?php echo esc_attr( $answer['text'] ?? '' ); ?>" 
 										placeholder="<?php esc_attr_e( 'Entrez la réponse...', 'viral-quiz' ); ?>" />
 								</label>
+							</p>
+							
+							<p>
+								<label>
+									<strong><?php esc_html_e( 'Image de la réponse (optionnel) :', 'viral-quiz' ); ?></strong>
+								</label>
+								<div class="vq-answer-image-container">
+									<?php
+									$answer_image = isset( $answer['image'] ) ? esc_url( $answer['image'] ) : '';
+									$answer_image_id = isset( $answer['image_id'] ) ? absint( $answer['image_id'] ) : 0;
+									?>
+									<input type="hidden" class="vq-answer-image-id" value="<?php echo esc_attr( $answer_image_id ); ?>" />
+									<input type="hidden" class="vq-answer-image-url" value="<?php echo esc_url( $answer_image ); ?>" />
+									<div class="vq-image-preview">
+										<?php if ( $answer_image ) : ?>
+											<img src="<?php echo esc_url( $answer_image ); ?>" alt="" style="max-width: 150px; height: auto; display: block; margin: 10px 0;" />
+											<button type="button" class="vq-remove-image button"><?php esc_html_e( 'Supprimer', 'viral-quiz' ); ?></button>
+										<?php else : ?>
+											<button type="button" class="vq-upload-image button"><?php esc_html_e( 'Choisir une image', 'viral-quiz' ); ?></button>
+										<?php endif; ?>
+									</div>
+								</div>
 							</p>
 							
 							<?php if ( 'trivia' === $quiz_type ) : ?>

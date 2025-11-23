@@ -87,6 +87,8 @@ class VQ_JSON_Importer {
 			
 			$formatted_question = array(
 				'question_text' => sanitize_text_field( $question_data['question_text'] ),
+				'image'         => isset( $question_data['image'] ) ? esc_url_raw( $question_data['image'] ) : '',
+				'image_id'      => isset( $question_data['image_id'] ) ? absint( $question_data['image_id'] ) : 0,
 				'answers'       => array(),
 			);
 			
@@ -101,6 +103,8 @@ class VQ_JSON_Importer {
 					'score'      => isset( $answer_data['score'] ) ? absint( $answer_data['score'] ) : 0,
 					'is_correct' => isset( $answer_data['is_correct'] ) && $answer_data['is_correct'] ? '1' : '0',
 					'house'      => isset( $answer_data['house'] ) ? strtolower( sanitize_text_field( $answer_data['house'] ) ) : '',
+					'image'      => isset( $answer_data['image'] ) ? esc_url_raw( $answer_data['image'] ) : '',
+					'image_id'   => isset( $answer_data['image_id'] ) ? absint( $answer_data['image_id'] ) : 0,
 				);
 				
 				$formatted_question['answers'][] = $formatted_answer;
@@ -112,6 +116,8 @@ class VQ_JSON_Importer {
 					'text'       => '',
 					'score'      => 0,
 					'is_correct' => '0',
+					'image'      => '',
+					'image_id'   => 0,
 				);
 			}
 			

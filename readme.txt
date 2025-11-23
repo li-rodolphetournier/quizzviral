@@ -314,6 +314,8 @@ Le plugin supporte l'importation de quiz depuis un fichier JSON. Voici un exempl
 
 Chaque question doit contenir :
 * **question_text** (requis) : Texte de la question
+* **image** (optionnel) : URL de l'image de la question
+* **image_id** (optionnel) : ID WordPress de l'image (si uploadée via WordPress)
 * **answers** (requis) : Tableau de réponses (minimum 4)
 
 Chaque réponse doit contenir :
@@ -321,6 +323,8 @@ Chaque réponse doit contenir :
 * **score** (requis) : Score numérique (0 pour trivia, variable pour personality)
 * **is_correct** (requis) : true/false (true pour la bonne réponse en trivia)
 * **house** (optionnel) : Maison pour quiz personnalité (gryffondor, serdaigle, serpentard, poufsouffle)
+* **image** (optionnel) : URL de l'image de la réponse
+* **image_id** (optionnel) : ID WordPress de l'image (si uploadée via WordPress)
 
 === Instructions d'importation ===
 

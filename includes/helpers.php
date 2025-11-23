@@ -40,6 +40,8 @@ function vq_sanitize_questions( $questions ) {
 	foreach ( $questions as $question ) {
 		$sanitized_question = array(
 			'question_text' => sanitize_text_field( $question['question_text'] ?? '' ),
+			'image'         => isset( $question['image'] ) ? esc_url_raw( $question['image'] ) : '',
+			'image_id'      => isset( $question['image_id'] ) ? absint( $question['image_id'] ) : 0,
 			'answers'       => array(),
 		);
 		
@@ -50,6 +52,8 @@ function vq_sanitize_questions( $questions ) {
 					'score'      => isset( $answer['score'] ) ? absint( $answer['score'] ) : 0,
 					'is_correct' => isset( $answer['is_correct'] ) ? sanitize_text_field( $answer['is_correct'] ) : '0',
 					'house'      => isset( $answer['house'] ) ? strtolower( sanitize_text_field( $answer['house'] ) ) : '',
+					'image'      => isset( $answer['image'] ) ? esc_url_raw( $answer['image'] ) : '',
+					'image_id'   => isset( $answer['image_id'] ) ? absint( $answer['image_id'] ) : 0,
 				);
 			}
 		}

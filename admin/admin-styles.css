@@ -68,3 +68,28 @@
 	margin-top: 20px;
 }
 
+/* Styles pour les images */
+.vq-question-image-container,
+.vq-answer-image-container {
+	margin-top: 10px;
+}
+
+.vq-image-preview {
+	margin-top: 10px;
+}
+
+.vq-image-preview img {
+	max-width: 200px;
+	height: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 5px;
+	background: #fff;
+	display: block;
+	margin-bottom: 10px;
+}
+
+.vq-image-preview .vq-remove-image {
+	margin-top: 5px;
+}
+
