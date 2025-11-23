@@ -1,5 +1,5 @@
 === ViralQuiz ===
-Contributors: YourName
+Contributors: tournier Rodolphe
 Tags: quiz, trivia, personality, viral, interactive
 Requires at least: 5.0
 Tested up to: 6.4
