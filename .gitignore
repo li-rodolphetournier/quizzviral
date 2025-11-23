@@ -1,0 +1,130 @@
+# ============================================
+# Plugin WordPress - ViralQuiz
+# ============================================
+
+# ============================================
+# Fichiers système
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================
+# IDE et éditeurs
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# ============================================
+# Fichiers temporaires et logs
+# ============================================
+*.log
+*.tmp
+*.temp
+*.cache
+*.bak
+*.backup
+*.old
+
+# ============================================
+# Archives et distributions
+# ============================================
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+viral-quiz.zip
+
+# ============================================
+# Node.js (si vous utilisez npm/yarn plus tard)
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ============================================
+# Composer (si vous utilisez Composer)
+# ============================================
+/vendor/
+composer.lock
+composer.phar
+
+# ============================================
+# Fichiers de configuration locaux
+# ============================================
+.env
+.env.local
+.env.*.local
+config.local.php
+wp-config-local.php
+
+# ============================================
+# Fichiers de test et développement
+# ============================================
+*.test.php
+*.spec.php
+phpunit.xml
+.phpunit.result.cache
+coverage/
+.nyc_output/
+
+# ============================================
+# Fichiers de build et compilation
+# ============================================
+dist/
+build/
+*.min.js
+*.min.css
+*.map
+
+# ============================================
+# Fichiers de documentation générés
+# ============================================
+docs/_build/
+*.pdf
+
+# ============================================
+# Fichiers spécifiques au plugin (optionnel)
+# ============================================
+# Décommentez si vous ne voulez pas versionner ces fichiers
+# check-files.php
+# install-helper.php
+# poudlard-quiz.json
+
+# ============================================
+# Fichiers de sauvegarde WordPress
+# ============================================
+*.sql
+*.sql.gz
+*.dump
+
+# ============================================
+# Fichiers de traduction compilés
+# ============================================
+*.mo
+*.pot
+
+# ============================================
+# Fichiers de cache
+# ============================================
+.cache/
+cache/
+tmp/
